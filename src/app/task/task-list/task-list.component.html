@@ -1,0 +1,77 @@
+
+<div class="flex justify-between items-center mb-4">
+    <h2 class="text-lg font-semibold dark:text-white">Task List</h2>
+    <button class="flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-500 rounded-md dark:bg-blue-600 dark:text-gray-200"
+    click="taskState.dispatch('openModal', { type: 'add' })"
+    >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-2" viewBox="0 0 24 24" width="24" height="24">
+            <path fill="none" d="M0 0h24v24H0z" />
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17h-2v-2h2v2zm0-4h-2v-5h2v5z" />
+        </svg>
+        Add Task
+    </button>
+</div>
+<div class="relative overflow-x-auto">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    TITULO
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    DESCRIPCION
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    ESTADO
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    ASIGNADO A.
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    FECHA DE CREACION
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    FECHA DE ACTUALIZACION
+                </th>
+                <th>
+                 Acciones
+                </th>
+        </thead>
+        <tbody>
+
+         @for (task of taskState.state().tasks; track task) {
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    {{ task.titulo }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ task.descripcion }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ task.estado }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ task.usuarioId }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ task.fechaCreacion }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ task.fechaActualizacion }}
+                </td>
+                <td class="mb-5 flex justify-end space-x-2 align-middle">
+                  <button (click)="EditarTask(task.id)"
+                  type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Editar
+                  </button>
+                  <button (click)="EliminarTask(task.id)"
+                  type="button" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                    Eliminar
+                  </button>
+                </td>
+            </tr>
+        }
+
+        </tbody>
+    </table>
+</div>
